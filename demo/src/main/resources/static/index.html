@@ -1,0 +1,66 @@
+<html>
+<head>
+</head>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script>
+$(document).ready(function () {
+           $.getJSON("/jobs/getallJobs", function (data) {
+             var Job_data = '';
+             $.each(data, function (key, value) {
+               Job_data += '<tr>';
+               Job_data += '<td class="jobID">' + value.jobID + '</td>';
+               Job_data += '<td>' + value.status + '</td>';
+               Job_data += '<td>' + value.progress + '</td>';
+               Job_data += '</tr>';
+             });
+             $('#JobTable').append(Job_data);
+           });
+		   });
+		   
+		   
+</script>      
+<section class="bg-light" style="padding-top:15px">
+         <div id="main" class="sectionAdmin">
+            <div class="section-center">
+               <div class="container">
+               <div id="iteeem" class="row"><center>
+               <h2><font face="verdana">PA Challenge Remote File Fetcher </font></h2></center>
+			   <br>
+               <br/>
+			   <form id="submit" action="/jobs/fetch" method="post" >
+			   <h3>Enter the File URL :</h3> <input id="filename" name="filename" type="text" />
+			   <button id="SubmitM" name="SubmitM" class="login100-form-btn">Fetch File</button>
+			   </form>
+               <br><br><br>
+			   <form id="submit" action="/jobs/progress" method="get" >
+			   <h3>Enter the JobID :</h3> <input id="jobID" name="jobID" type="text" />
+			   <button id="Submit" name="Submit" class="login100-form-btn">Get Progress</button>
+			   </form>
+               <div class="row">
+			    <a class="txt1" href="index.html">
+               <center><b>Refresh Jobs List</b></center>
+               </a>
+              </div>
+               <div class="row">
+			   <h3><font face="verdana">List of Jobs</font></h3>
+               <div class="col-md-12">
+               <table id="JobTable" class="table table-bordered table-condensed table-striped">
+               <thead>
+               <tr>
+               <th>Job ID </th>
+               <th>Status</th>
+               <th>Progress</th>
+               </tr>
+               </thead>
+               </table>
+			   </div>
+               </div>
+               </div>
+         </div>
+      </section>
+</body>
+</html>
